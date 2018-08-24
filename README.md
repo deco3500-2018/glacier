@@ -1,4 +1,4 @@
-# GLACIERS | DECO7350 Social & Mobile Computing
+# GLACIER | DECO7350 Social & Mobile Computing
 
 
 ## Authors
