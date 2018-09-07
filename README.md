@@ -1,5 +1,6 @@
 # GLACIER | DECO7350 Social & Mobile Computing
 
+## Link to [proposal](https://github.com/deco3500-2018/glacier/wiki/Proposal)
 
 ## Authors
 * **Tiril Solberg** - [GitHub](https://github.com/tmsolber/)
