@@ -1,22 +1,85 @@
-var express = require('express')
-var bodyParser = require('body-parser')
-var app = express()
+//Requires
+const express = require('express');
+const bodyParser = require('body-parser');
+const btoa = require('btoa');
+const fetch = require('node-fetch');
+
+//Constants
+const clientId = '';
+const clientSecret = '';
+const token = btoa(`${clientId}:${clientSecret}`);
+const redirectUri = 'http://localhost:3000/authentication/success';
+const scopes = 'user-read-playback-state user-modify-playback-state';
+const state = {
+  queue: [],
+  user: ''
+};
+
+//Static routes
+const app = express();
 app.use(bodyParser.json());
 
-const state = {
-    queue: []
-}
+let bearerToken = '';
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
- 
-app.post('/queueSong', function(req, res) {
-    console.log("hello", req.body);
-    const song = { id: req.body.songId }
-    state.queue = [song, ...state.queue];
-    console.log('state', state);
-    res.send("mottatt");
-})
+app.get('/', (req, res) => {
+  if (bearerToken.length === 0) {
+    // Get URL to verify spotify oAUTH that calls /authentication/success
+    res.redirect(
+      `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
+        scopes
+      )}`
+    );
+  }
+  res.redirect('/devices');
+});
 
-app.listen(3000)
+app.get('/authentication/success', (req, res) => {
+  // Express GET callback endpoint that uses code to set bearerToken
+  const code = req.query.code;
+  if (code.length === 0) {
+    res.send('No spotify code');
+    return;
+  }
+  fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${token}`,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: `grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}`
+  })
+    .then(response => response.json())
+    .then(response => {
+      console.log('callapires', response);
+      console.log('bearerTOken', response.access_token);
+      bearerToken = response.access_token ? response.access_token : '';
+      res.redirect('/devices');
+    });
+});
+
+app.get('/devices', (req, res) => {
+  const getDevices = callApi('https://api.spotify.com/v1/me/player/devices')
+    .then(response => {
+      res.send(response);
+    })
+    .catch(err => {
+      print(err);
+      return res.send('Error');
+    });
+});
+
+const callApi = (url, options) => {
+  console.log('urlopts', url, options, bearerToken);
+  return fetch(url, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+      ...(options && options.headers)
+    }
+  }).then(res => {
+    console.log('res', res);
+    return res.json();
+  });
+};
+
+app.listen(3000, () => console.log(`App listening on port ${3000}!`));
