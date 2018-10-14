@@ -68,6 +68,34 @@ app.get('/devices', (req, res) => {
     });
 });
 
+//Play song
+app.post('/play', (req, res) => {
+  callApi('https://api.spotify.com/v1/me/player/play', {
+    method: 'PUT'
+    //body: { "uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh", "spotify:track:1301WleyT98MSxVHPZCA6M"] }
+  }).then(response => {
+    console.log('response', response);
+    res.send(200);
+  });
+});
+
+//Add song to playlist for prototype
+app.post('/addSong', (req, res) => {
+  callApi(`/v1/playlists/${playlist_id}/tracks`, {
+    method: 'POST'
+  }).then(response => {
+    console.log('response', response);
+    res.send(200);
+  });
+});
+
+//Get songs during search
+app.get('/searchSong', (req, res) => {
+  callApi('https://api.spotify.com/v1/search', {
+    method: 'GET'
+  });
+});
+
 const callApi = (url, options) => {
   console.log('urlopts', url, options, bearerToken);
   return fetch(url, {
