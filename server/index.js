@@ -9,7 +9,8 @@ const clientId = '';
 const clientSecret = '';
 const token = btoa(`${clientId}:${clientSecret}`);
 const redirectUri = 'http://localhost:3000/authentication/success';
-const scopes = 'user-read-playback-state user-modify-playback-state';
+const scopes =
+  'user-read-playback-state user-modify-playback-state playlist-modify-public';
 const playlist_id = '5canH0tddAJg0y1k5kNaAL';
 const base_uri = 'https://api.spotify.com/v1';
 const state = {
@@ -186,13 +187,13 @@ app.get('/getCurrent', (req, res) => {
 //Add song to playlist for prototype
 app.post('/addSong', (req, res) => {
   callApi(`/playlists/${playlist_id}/tracks`, {
-    method: 'POST'
-    //body: JSON.stringify({
-    //  uris: [
-    //    'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
-    //    'spotify:track:1301WleyT98MSxVHPZCA6M'
-    //  ]
-    //})
+    method: 'POST',
+    body: JSON.stringify({
+      uris: [
+        'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
+        'spotify:track:1301WleyT98MSxVHPZCA6M'
+      ]
+    })
   }).then(response => {
     console.log('response', response);
     res.send(200);
@@ -202,9 +203,14 @@ app.post('/addSong', (req, res) => {
 
 //Delete song from playlist when user leaves
 app.delete('/delete', (req, res) => {
-  callApi(`playlists/${playlist_id}/tracks`, {
-    method: 'DLETE'
-    //body: JSON.stringify({ uris: ['spotify:track:7CUYHcu0RnbOnMz4RuN07w'] })
+  callApi(`/playlists/${playlist_id}/tracks`, {
+    method: 'DELETE',
+    body: JSON.stringify({
+      uris: [
+        'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
+        'spotify:track:1301WleyT98MSxVHPZCA6M'
+      ]
+    })
   });
 });
 //Get songs during search
@@ -217,7 +223,7 @@ app.get('/searchSong', (req, res) => {
 //
 
 const callApi = (url, options) => {
-  console.log('urlopts', url, options, bearerToken);
+  console.log('urlopts', options);
   return fetch(base_uri + url, {
     ...options,
     headers: {
