@@ -241,4 +241,28 @@ const callApi = (url, options) => {
     });
 };
 
+const readline = require('readline');
+readline.emitKeypressEvents(process.stdin);
+process.stdin.setRawMode(true);
+process.stdin.on('keypress', (str, key) => {
+  if (key.ctrl && key.name === 'c') {
+    process.exit();
+  } else {
+    if (key.name === "right") {
+      callApi('/me/player/next', {
+        method: 'POST'
+      }).then(response => {
+        console.log('response', response);
+      });
+    }
+    if (key.name === "space") {
+      callApi('/me/player/play', {
+        method: 'PUT'
+      }).then(response => {
+        console.log('response', response);
+      });
+    }
+  }
+});
+
 app.listen(3000, () => console.log(`App listening on port ${3000}!`));
