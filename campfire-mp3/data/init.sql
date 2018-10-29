@@ -1,0 +1,11 @@
+CREATE DATABASE campfire;
+
+use campfire;
+
+CREATE TABLE songs (
+	id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	songname VARCHAR(50) NOT NULL,
+	artist VARCHAR(50) NOT NULL,
+	url VARCHAR (150) NOT NULL
+	
+);

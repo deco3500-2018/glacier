@@ -1,0 +1,31 @@
+1. Copy 'campfire-mp3' into server file location. (with mamp:  mamp/htdocs)
+2. Run 'campfire-mp3/install.php' to set up the database. 
+3. Use phpMyAdmin (found on the mamp html start page) to populate the database 'songs'. This is done on the insert tab.
+	a. Id can be left blank (auto filled)
+	b. Mp3urls needs t o end with .mp3
+	c. Selected = 0 
+	d. Users should be either one, two, three, four
+	e. Color:
+		i. User 1 = 7EE8FA
+		ii. user 2 = FFF07C
+		iii. User 3 = EF767A
+		iv. User 4 = 7DCE82
+		v. Can be done with sql: UPDATE 'songs' SET color="7EE8FA " WHERE user='one'	
+
+4. Songs need to be placed into a file called 'video ' 
+
+
+
+
+NOTES
+1. Player.php controls are currently mapped to a,w, and space
+	a. A= stop	
+	b. W = play 
+	c. Space = skip/next page
+       	This can be changed in first <script> section of campfire-mp3/public/player.php
+       
+2. You may want to change the songs I'm using as they were more tailored to my fam. I have about half of the original set downloaded and converted to mp3. 
+       http://convert2mp3.net/en/
+
+       I can't think of any more steps but who knows. 
+

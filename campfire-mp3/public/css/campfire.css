@@ -1,0 +1,63 @@
+/*User Colours
+User 1 7EE8FA
+user 2 FFF07C
+User 3 EF767A
+User 4 7DCE82
+
+grey: 607B7D
+
+
+*/
+body{
+	
+}
+
+h1,h2,h3,h4,h5, p, a, li, ul {
+	font-family: 'Niramit', sans-serif;
+}
+
+
+.audioDiv h2 {
+	font-size: 3em;
+	
+}
+
+
+
+a{
+	color: teal;
+	text-decoration: none;
+}
+
+a:visited{
+	color: teal;
+	
+}
+
+a:hover{
+	font-weight: bold;
+}
+
+
+#fire{
+	max-width: 65px;
+	width:100%;
+	height: auto;
+	
+	
+}
+
+.maincontent{
+	margin: 0 auto;
+	
+	text-align: center;
+	
+}    
+
+.maincontent ul{
+	list-style: none;
+	//text-align: justify;
+	padding:0;
+}
+
+

@@ -1,0 +1,61 @@
+input[type=submit],button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+	font-family: 'Niramit', sans-serif;
+}
+
+input[type=submit],button {
+      background-color: #e7e7e7;
+    color: black;
+		
+}
+
+input[type=submit]:hover,button:hover {
+  background-color: #607B7D;
+  color: white;
+  
+  }
+  
+  .mCenter input[type=submit]{
+	  margin-top: 2px;
+	 
+  }
+  
+  .mCenter h4{
+	  margin-bottom: 0;
+  }
+
+  
+  #fixedRefresh input[type=image]{
+	background-color: none;
+    border: none;
+    color: white;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+	font-family: 'Niramit', sans-serif;	 
+
+	 height: 40px;
+	  width: 40px;
+	  padding:0;
+	  margin: 10px;
+	  display:block;
+	 
+	  
+  }
